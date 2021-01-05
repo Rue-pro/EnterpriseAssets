@@ -10,6 +10,7 @@ import { assetFieldValidation } from '../../config/formFieldsValidation'
 export const AssetEditor = (props) => {
   const { currentConfig } = props
   let { asset } = props
+  let prefix = ''
   const headerData = {
     headerName: (asset && asset.name !== '') ? (asset.name ? 'Актив ' + asset.name : 'Актив ' + asset.id) : 'Создание нового актива',
     handleClose: props.handleClose
@@ -20,6 +21,7 @@ export const AssetEditor = (props) => {
     // делаем пустые поля в объекте или начальное значение в валюте (ругается material-ui)
     let emptyAsset = {}
     let currentConfigKeys = Object.keys(currentConfig)
+    prefix = currentConfigKeys.indexOf( 'units' ) == -1 ? 'money': 'nonmoney'
     for (let i = 0; i < currentConfigKeys.length; i++) {
       let fieldIndex = currentConfigKeys[i]
       if (fieldIndex === 'currency') {
@@ -64,7 +66,7 @@ export const AssetEditor = (props) => {
                     addedFields = field.merge.map(el => { // выводим все поля, которые должны быть рядом
                       mergedFields.push(el)
                       return <FormikField
-                        key={currentConfig[el].fieldType + '_' + el}
+                        key={prefix + '_' + currentConfig[el].fieldType + '_' + el + '_' + i}
                         fieldType={currentConfig[el].fieldType}
                         name={el}
                         type='text'
@@ -72,12 +74,13 @@ export const AssetEditor = (props) => {
                         autoComplete='off'
                         fullWidth={false}
                         selectors={currentConfig[el].selectors}
+                        prefix={prefix}
                       />
                     })
                   }
                   return <>
                     <FormikField
-                      key={field.fieldType + '_' + field.id}
+                      key={prefix + '_' + field.fieldType + '_' + field.id + '_'+ i}
                       fieldType={field.fieldType}
                       name={field.id}
                       type='text'
@@ -85,6 +88,7 @@ export const AssetEditor = (props) => {
                       autoComplete='off'
                       fullWidth={fullWidth}
                       selectors={field.selectors}
+                      prefix={prefix}
                     />
                     {addedFields && addedFields}
                   </>

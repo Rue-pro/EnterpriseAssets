@@ -56,7 +56,7 @@ const AssetsListContainer = (props) => {
         handleClickOpen,
         handleClose
     }
-    if(assets) {
+    if(assets.length) {
         return (
             <>
                 <AssetsList 

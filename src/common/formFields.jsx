@@ -2,7 +2,7 @@ import React from 'react'
 import { TextField, MenuItem } from '@material-ui/core';
 import { useField } from 'formik';
 
-export const FormikField = ({ fieldType, selectors, ...props }) => {
+export const FormikField = ({ fieldType, selectors, prefix, ...props }) => {
     const [field, meta] = useField(props)
     let helperText = null
     let error = false
@@ -19,9 +19,10 @@ export const FormikField = ({ fieldType, selectors, ...props }) => {
                     error={error}
                     {...field}
                     {...props}
+                    margin='dense'
                 >
                     {selectors.map(option => {
-                        return <MenuItem key={option.value} value={option.value}>
+                        return <MenuItem key={prefix + '_' + option.value} value={option.value}>
                             {option.label}
                         </MenuItem>
                     })}
@@ -34,6 +35,7 @@ export const FormikField = ({ fieldType, selectors, ...props }) => {
                     error={error}
                     {...field}
                     {...props}
+                    margin='dense'
                 />
             )
     }

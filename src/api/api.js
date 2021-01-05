@@ -67,7 +67,6 @@ export const assetsAPI = {
         )
     },
     addAsset(assetData, type) {
-        console.log(assetData)
         let docRef = getDocRef(type)
         if(docRef === null) {
             Promise.resolve(getResult(
