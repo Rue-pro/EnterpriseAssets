@@ -5,8 +5,8 @@
   * Redux
   * Redux-think;
 * I mastered:
- * Firebase
- * Formik
- * Material-ui.
+  * Firebase
+  * Formik
+  * Material-ui.
  ### Demo
  ![](repo/demo.gif)
